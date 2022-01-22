@@ -1,0 +1,46 @@
+{% load static %}
+{% load widget_tweaks %}
+
+
+<script>window.setTimeout(function() {
+    $(".alertmsg").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 1500);</script>
+
+
+<!-- plugins:js -->
+<script src="{% static 'admin_data/vendors/js/vendor.bundle.base.js' %}"></script>
+<script src="{% static 'admin_data/vendors/js/vendor.bundle.addons.js' %}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script src="{% static 'admin_data/js/off-canvas.js' %}"></script>
+<script src="{% static 'admin_data/js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'admin_data/js/template.js' %}"></script>
+<script src="{% static 'admin_data/js/settings.js' %}"></script>
+<script src="{% static 'admin_data/js/todolist.js' %}"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'admin_data/js/dashboard.js' %}"></script>
+<script src="{% static 'admin_data/js/todolist.js' %}"></script>
+<!-- End custom js for this page-->
+<!-- endinject -->
+<!-- Custom js for this page-->
+<script src="{% static 'admin_data/js/formpickers.js' %}"></script>
+<script src="{% static 'admin_data/js/form-addons.js' %}"></script>
+<script src="{% static 'admin_data/js/x-editable.js' %}"></script>
+<script src="{% static 'admin_data/js/dropify.js' %}"></script>
+<script src="{% static 'admin_data/js/dropzone.js' %}"></script>
+<script src="{% static 'admin_data/js/jquery-file-upload.js' %}"></script>
+<script src="{% static 'admin_data/js/formpickers.js' %}"></script>
+<script src="{% static 'admin_data/js/form-repeater.js' %}"></script>
+
+
+<script src="{% static 'admin_data/js/data-table.js' %}"></script>
+
+<script src="{% static 'admin_data/js/file-upload.js' %}"></script>
+<script src="{% static 'admin_data/js/typeahead.js' %}"></script>
+<script src="{% static 'admin_data/js/select2.js' %}"></script>
+

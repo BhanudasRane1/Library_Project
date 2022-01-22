@@ -1,0 +1,143 @@
+{% load static %}
+
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Finate - Job Portal Website Template Using Bootstrap 5"/>
+    <meta name="keywords" content="accessories, digital products, electronic html, modern, products, responsive"/>
+    <meta name="author" content="hastech"/>
+
+    <title>Login || Last Working Day  </title>
+    {% include 'user_panel/css.html' %}
+
+</head>
+
+<body>
+
+<!--wrapper start-->
+<div class="wrapper">
+  
+  <!--== Start Header Wrapper ==-->
+  {% include 'user_panel/nav.html' %}
+
+  <!--== End Header Wrapper ==-->
+  
+  <main class="main-content">
+    <!--== Start Page Header Area Wrapper ==-->
+
+    <!--== End Page Header Area Wrapper ==-->
+
+    <!--== Start Login Area Wrapper ==-->
+    <section class="account-login-area">
+      <div class="container">
+
+        <div class="row justify-content-center">
+                    <script>window.setTimeout(function() {
+                      $(".alertmsg").fadeTo(500, 0).slideUp(500, function(){
+                          $(this).remove(); 
+                      });
+                    }, 2000);</script>
+                {% if form.errors %}
+                  {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert alertmsg alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Hey !</strong> {{ error }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    {% endfor %}
+                  {% endfor %}
+
+                  {% for error in form.non_field_errors %}
+                  <div class="alert alertmsg alert-primary alert-dismissible fade show" role="alert">
+                      <strong>Hey !</strong> {{ error|escape }}.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+            
+          </div>
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-7 col-xl-6">
+            <div class="login-register-form-wrap">
+              <div class="login-register-form">
+                <div class="form-title">
+                  <h4 class="title">Sign In</h4>
+                </div>
+                <form  method="POST" action="{% url 'login_url' %}">
+                  {% csrf_token %}
+                  {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                  {% endif %}
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="name@address.com" id="inputEmail4">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password" id="inputPassword4">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <div class="remember-forgot-info">
+                          <div class="remember">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">Remember me</label>
+                          </div>
+                          <div class="forgot-password">
+                            <a href="">Forgot Password?</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <button type="submit" class="btn-theme">Sign In</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="login-register-form-info">
+                  <p>Don't you have an account? <a href="{% url 'signup_url' %}">Sign Up</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Login Area Wrapper ==-->
+  </main>
+
+  <!--== Start Footer Area Wrapper ==-->
+  <footer class="footer-area">
+    <!--== Start Footer Top ==-->
+    
+
+    <!--== Start Footer Main ==-->
+    {% include 'user_panel/footer.html' %}
+
+    <!--== End Footer Main ==-->
+
+  </footer>
+  <!--== End Footer Area Wrapper ==-->
+</div>
+
+<!--=======================Javascript============================-->
+{% include 'user_panel/js.html' %}
+
+</body>
+
+
+</html>

@@ -1,0 +1,32 @@
+{% load static%}
+{% load widget_tweaks%}
+<!--=== jQuery Modernizr Min Js ===-->
+<script src="{% static 'user_panel/js/modernizr.js' %}"></script>
+<!--=== jQuery Min Js ===-->
+<script src="{% static 'user_panel/js/jquery-main.js' %}"></script>
+<!--=== jQuery Migration Min Js ===-->
+<script src="{% static 'user_panel/js/jquery-migrate.js' %}"></script>
+<!--=== jQuery Popper Min Js ===-->
+<script src="{% static 'user_panel/js/popper.min.js' %}"></script>
+<!--=== jQuery Bootstrap Min Js ===-->
+<script src="{% static 'user_panel/js/bootstrap.min.js' %}"></script>
+<!--=== jQuery Swiper Min Js ===-->
+<script src="{% static 'user_panel/js/swiper.min.js' %}"></script>
+<!--=== jQuery Fancybox Min Js ===-->
+<script src="{% static 'user_panel/js/fancybox.min.js' %}"></script>
+<!--=== jQuery Aos Min Js ===-->
+<script src="{% static 'user_panel/js/aos.min.js' %}"></script>
+<!--=== jQuery Counterup Min Js ===-->
+<script src="{% static 'user_panel/js/counterup.js' %}"></script>
+<!--=== jQuery Waypoint Js ===-->
+<script src="{% static 'user_panel/js/waypoint.js' %}"></script>
+
+<!--=== jQuery Custom Js ===-->
+<script src="{% static 'user_panel/js/custom.js' %}"></script>
+
+
+<script>window.setTimeout(function() {
+    $(".alertmsg").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 1500);</script>

@@ -1,0 +1,27 @@
+{% load static%}
+{% load widget_tweaks%}
+
+<header style=" padding: 0 15px;margin-top: 20px;" class="header-area transparent">
+    <div class="container">
+      <div class="row no-gutter align-items-center position-relative">
+        <div class="col-12">
+          <div class="header-align">
+            <div class="header-align-start">
+              <div class="header-logo-area">
+                <h3>Library Management System</h3>
+              </div>
+            </div>
+         
+            <div class="header-align-end">
+              <div class="header-action-area">
+                <a class="btn-registration" href="{% url 'login_url' %}">Admin Login</a>
+                <button class="btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
+                  <i class="icofont-navigation-menu"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>

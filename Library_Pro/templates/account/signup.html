@@ -1,0 +1,165 @@
+{% load static %}
+
+{% load widget_tweaks %}
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Finate - Job Portal Website Template Using Bootstrap 5"/>
+    <meta name="keywords" content="accessories, digital products, electronic html, modern, products, responsive"/>
+    <meta name="author" content="hastech"/>
+    <title>Sign Up || Last Working Day  </title>
+    {% include 'user_panel/css.html' %}
+</head>
+
+<body>
+
+<!--wrapper start-->
+<div class="wrapper">
+  
+  <!--== Start Header Wrapper ==-->
+  {% include 'user_panel/nav.html' %}
+
+  <!--== End Header Wrapper ==-->
+  
+  <main class="main-content">
+    <!--== Start Page Header Area Wrapper ==-->
+
+    <!--== End Page Header Area Wrapper ==-->
+
+    <!--== Start Login Area Wrapper ==-->
+    <section class="account-login-area">
+      <div class="container">
+
+        <div class="row justify-content-center">
+                    <script>window.setTimeout(function() {
+                      $(".alertmsg").fadeTo(500, 0).slideUp(500, function(){
+                          $(this).remove(); 
+                      });
+                    }, 2000);</script>
+                {% if form.errors %}
+                  {% for field in form %}
+                    {% for error in field.errors %}
+                    <div class="alert alertmsg alert-primary alert-dismissible fade show" role="alert">
+                        <strong>Hey !</strong> {{ error }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    {% endfor %}
+                  {% endfor %}
+
+                  {% for error in form.non_field_errors %}
+                  <div class="alert alertmsg alert-primary alert-dismissible fade show" role="alert">
+                      <strong>Hey !</strong> {{ error|escape }}.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+            
+          </div>
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-7 col-xl-6">
+            <div class="login-register-form-wrap">
+              <div class="login-register-form">
+                <div class="form-title">
+                  <h4 class="title">Sign Up</h4>
+                </div>
+                <form  method="POST" id="signup_form" action="{% url 'signup_url' %}">
+                  {% csrf_token %}
+                        {% if redirect_field_value %}
+                          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                  <div class="row">
+
+
+                    <div class="col-12">
+                      <div class="form-group">
+                  <input type="text" class="form-control" name="first_name" placeholder="Name" id="id_first_name">
+                      </div>
+                    </div>
+                    <!-- <div class="col-12">
+                      <div class="form-group">
+                  <input type="text" class="form-control" name="username" placeholder="username" id="id_username">
+                      </div>
+                    </div> -->
+                    
+                    
+                    <input type="hidden" class="form-control" name="username"   value="" placeholder="username" id="id_username">
+
+                    <div class="col-12">
+                      <div class="form-group">
+                  <input type="email" class="form-control" name="email" placeholder="name@address.com" id="id_email">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="password1" placeholder="Password" id="id_password1">
+                  </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <input type="password" class="form-control" name="password2" placeholder="Password" id="id_password2">
+                  </div>
+                    </div>
+                    
+                    <div class="col-12">
+                      <div class="form-group">
+
+                        <button onclick="DoSubmit()" type="submit" class="btn-theme">Sign Up</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="login-register-form-info">
+                  <p>Already have an account? <a href="{% url 'login_url' %}">Sign In</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Login Area Wrapper ==-->
+  </main>
+
+  <!--== Start Footer Area Wrapper ==-->
+  <footer class="footer-area">
+    <!--== Start Footer Top ==-->
+    
+
+    <!--== Start Footer Main ==-->
+    {% include 'user_panel/footer.html' %}
+
+    <!--== End Footer Main ==-->
+
+  </footer>
+  <!--== End Footer Area Wrapper ==-->
+
+
+</div>
+
+<script>
+  function DoSubmit(){
+  $("#id_username").val(document.getElementById("id_email").value);
+  console.log(id_username)
+  console.log(id_email)
+  document.getElementById("form_cand_reg").submit();
+
+
+}
+</script>
+<!--=======================Javascript============================-->
+{% include 'user_panel/js.html' %}
+
+</body>
+
+
+</html>

@@ -1,0 +1,375 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Library  || Book Record</title>
+    {% include 'admin_data/css.html' %}
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="horizontal-menu">
+            {% include 'admin_data/admin/top_nav.html' %}
+            {% include 'admin_data/admin/bottom_nav.html' %}
+        </div>
+
+        {% if messages %}
+        <div class="card alertmsg ">
+            <div class="card-body">
+            {% for message in messages %}
+                    {% if 'safe' in message.tags %}{{ message|safe }}{% else %}
+                    <div class="alert  alertmsg alert-{{ message.tags }} " role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        {{ message }} &emsp;&emsp;
+                    </div>
+                    {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+
+                <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row" style="justify-content: center;" >
+                        <div class="col-md-10 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Book Data </h4>
+                                    <div>
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal-profile">
+                                                Add Book <i class="mdi mdi-pencil ml-1"></i></button>
+                                        </div>
+                                        <!-- Modal Satar -->
+                                        <div class="modal fade" id="exampleModal-profile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel-2">
+                                                            Add Book Record </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <form  method="post"  enctype="multipart/form-data" class="forms-sample">
+                                                            {% csrf_token %}
+                                                            
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputUsername1">Book Title*</label> 
+                                                                    {{ book_data_form.title | append_attr:"class:form-control"|append_attr:"placeholder:Title" }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputUsername1">Book Author*</label> 
+                                                                    {{ book_data_form.author | append_attr:"class:form-control"|append_attr:"placeholder:Book Author" }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputUsername1">Book Publisher*</label> 
+                                                                    {{ book_data_form.publisher | append_attr:"class:form-control"|append_attr:"placeholder:Book Publisher" }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputUsername1">Book Edition*</label> 
+                                                                    {{ book_data_form.edition | append_attr:"class:form-control"|append_attr:"placeholder:Book Edition" }}
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="exampleInputUsername1"> Book Image *</label> 
+                                                                    {{ book_data_form.book_img | append_attr:"class:form-control"|append_attr:"placeholder: Book Image" }}
+                                                                    </div>
+                                                                </div>
+                                                
+                                                                                                                        
+                                                            <div class="form-group" style="justify-content: center; text-align: center; ">
+                                                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                                                <button class="btn btn-light" type="button" class="close" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal Ends -->
+                                    </div>
+
+
+<!-- edit start -->
+        <div class="modal fade" id="exampleModaleditproduct" tabindex="-1" role="dialog"
+                aria-labelledby="formModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="formModal"> Edit Tax Master </h5>
+                            <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="{% url 'edit_book_data_url' %}" enctype="multipart/form-data"  >
+                                {% csrf_token %}
+                                <input type="hidden" id="editid" name="editid" value="" >
+
+                                <label for="dname">Enter Title</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        {{ book_data_form.title  | append_attr:"id:titleid"| append_attr:"placeholder:Enter Title" | append_attr:"class:form-control"}} 
+                                    </div>
+                                </div>
+                                <label for="dname">Book Author</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        {{ book_data_form.author | append_attr:"id:authorid"| append_attr:"placeholder:Book Author" | append_attr:"class:form-control"}} 
+                                    </div>
+                                </div>
+                                <label for="dname">Book Publisher</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        {{ book_data_form.publisher | append_attr:"id:publisherid"| append_attr:"placeholder:Book Publisher" | append_attr:"class:form-control"}} 
+                                    </div>
+                                </div>
+                                <label for="dname">Book Edition</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        {{ book_data_form.edition | append_attr:"id:editionid"| append_attr:"placeholder:Book Edition" | append_attr:"class:form-control"}} 
+                                    </div>
+                                </div>
+                                <label for="dname">Book Image</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        {{ book_data_form.book_img | append_attr:"id:book_imgid"| append_attr:"placeholder:Book Image" | append_attr:"class:form-control"}} 
+                                    </div>
+                                </div>
+                                
+
+                                <div class="modal-footer">
+                                    <button type="submit"
+                                        class="btn btn-info waves-effect"> Save </button>
+                                    <button type="button" class="btn btn-danger waves-effect"
+                                        data-dismiss="modal">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+<!-- END  edit  -->
+
+
+<!-- Start delete  -->
+
+        <div class="modal fade" id="exampleModaldeleteproduct" tabindex="-1" role="dialog"
+        aria-labelledby="formModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModal"> Delete Book Record </h5>
+                <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'delete_book_data_url' %}"  method="post" >
+                    {% csrf_token %}
+                    <input type="hidden" id="deleteid" name="deleteid"  />
+                    <h2> Delete Book Record: <span class="col-red" id="deletespan">  </span> </h2>
+                    <p class="col-red" > All data belongs to particular book will be erased ! </p>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="submit"
+                            class="btn btn-danger waves-effect">Delete</button>
+                        <button type="button" class="btn btn-info waves-effect"
+                            data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        </div>
+
+
+<!-- End delete  -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        {% if book_data %}
+                        <table id="order-listing" class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>Publisher</th>
+                                    <th>Edition</th>
+                                    <th>Image</th>
+                                
+
+                                    <th>Active</th>
+                                    <th>Action</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in book_data %}
+                                <tr>
+                                    
+                                    <td>{{i.id}}</td>
+                                    <td>{{i.title}}</td>
+                                    <td>{{i.author}}</td>
+                                    <td>{{i.publisher}}</td>
+                                    <td>{{i.edition}}</td>
+                                    <td>{{i.book_img}}</td>
+                                
+
+
+                                        <td>
+                                        <a onclick="edit('{{ i.id }}','{{ i.title }}','{{ i.author }}','{{ i.publisher }}','{{ i.edition }}','{{ i.book_img }}')"  data-toggle="modal"  data-target="#exampleModaleditproduct"  >
+                                            <button type="button" class="btn btn-dark btn-icon-text">
+                                                Edit
+                                                <i class="fa fa-edit"></i>
+                                                </button>
+                                        </a>                          
+
+                                    </td>
+                                    <td>
+                                    <a onclick="del('{{ i.id }}','{{ i.title }}','{{ i.author }}','{{ i.publisher }}','{{ i.edition }}','{{ i.book_img }}')" data-toggle="modal"data-target="#exampleModaldeleteproduct" >
+                                        <button class="btn tblActnBtn">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </a>
+                                    </td>
+                                    
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    {%endif%}
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+                        
+    
+                <div class="col-md-10 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <nav aria-label="Page navigation example" style="float: right;" >
+                                        <ul class="pagination">
+                                            {% if book_data.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page=1" aria-label="Previous">
+                                                    <span aria-hidden="true">First</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ book_data.previous_page_number }}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>                                        
+                                            {% endif %}                            
+                                            {% for num in book_data.paginator.page_range  %}
+                                                {% if book_data.number == num %}
+                                                    <li class="page-item"><a class="page-link" href="#">{{ num }}</a></li>
+                                                    {% elif num > book_data.number|add:'-2' and num < book_data.number|add:'2' %}
+                                                    <li class="page-item"><a class="page-link" href="#">{{ num }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if book_data.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ book_data.next_page_number }}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ book_data.paginator.num_pages }}" aria-label="Next">
+                                                    <span aria-hidden="true">Last</span>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+
+
+
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                {% include 'admin_data/footer.html' %}
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+                <!-- page-body-wrapper ends -->
+
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->    
+
+    <script>
+
+function edit(editid, title,author,publisher,edition,book_img){
+        console.log(editid);
+        console.log("Edit Button Clicked");
+        $("#editid").val(editid);
+        $("#titleid").val(title);
+        $("#authorid").val(author);
+        $("#publisherid").val(publisher);
+        $("#editionid").val(edition);
+        $("#book_imgid").val(book_img);
+        
+       
+        event.preventDefault();
+    }
+
+    function del(id, title,author,publisher,edition,book_img){
+        console.log(id)
+        console.log("Delete Button Clicked");
+        $("#deleteid").val(id)
+        $("#deletespan").html(title)        
+        event.preventDefault();
+    }
+
+    </script>
+    {% include 'admin_data/js.html' %}
+
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <!-- End custom js for this page-->
+</body>
+
+</html>
