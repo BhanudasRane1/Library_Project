@@ -155,7 +155,9 @@
                                 </div>
                                 <label for="dname">Book Image</label>
                                 <div class="form-group">
-                                    <div class="form-line">
+                                    <div class>
+                                        <!-- <img id="image_id" src="" alt=""> -->
+                                        <a href="" id="anchor_image" > <span  id="anchor_span" ></span> </a>
                                         {{ book_data_form.book_img | append_attr:"id:book_imgid"| append_attr:"placeholder:Book Image" | append_attr:"class:form-control"}} 
                                     </div>
                                 </div>
@@ -240,10 +242,8 @@
                                     <td>{{i.author}}</td>
                                     <td>{{i.publisher}}</td>
                                     <td>{{i.edition}}</td>
-                                    <td>{{i.book_img}}</td>
+                                    <td><a href="{{ i.book_img }}">{{ i.book_img }}</a></td>
                                 
-
-
                                         <td>
                                         <a onclick="edit('{{ i.id }}','{{ i.title }}','{{ i.author }}','{{ i.publisher }}','{{ i.edition }}','{{ i.book_img }}')"  data-toggle="modal"  data-target="#exampleModaleditproduct"  >
                                             <button type="button" class="btn btn-dark btn-icon-text">
@@ -327,7 +327,7 @@
                     </div>
                 </div>
                 <!-- content-wrapper ends -->
-                <!-- partial:../../partials/_footer.html -->
+               
                 {% include 'admin_data/footer.html' %}
                 <!-- partial -->
             </div>
@@ -350,9 +350,13 @@ function edit(editid, title,author,publisher,edition,book_img){
         $("#authorid").val(author);
         $("#publisherid").val(publisher);
         $("#editionid").val(edition);
-        $("#book_imgid").val(book_img);
-        
-       
+        // $("#image_idid").val(book_img);
+        console.log(book_img)
+        // $("#image_id").attr("src",book_img);
+        $("#anchor_image").attr("href",book_img);
+        $("#anchor_span").text(book_img);
+        console.log(book_img)
+
         event.preventDefault();
     }
 

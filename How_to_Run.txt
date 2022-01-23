@@ -1,0 +1,16 @@
+
+
+Steps:
+
+Note :- Python is must install in system.
+
+Run the following command:-
+create virtual environment
+1) pip install virtualenv
+2) virtualenv env
+3) source ./env/Script/activate 
+
+Run Requirement.txt
+4) pip install -r requirement.txt
+5) python manage.py runserver
+

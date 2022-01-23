@@ -6,11 +6,9 @@ from .views_admin import *
 
 urlpatterns = [
 
-    # path('', Index.as_view(), name="index_url"),
-    
+    #Define urls for CRUD operations on books.   
     path('book_data', login_required(Book_Data_View.as_view()), name="book_data_url"), 
-    # path('employer_data/credit_order/<employer_id>/', login_required(Employer_Order_Detail_View.as_view()), name="credit_order_url"), 
-    path('book_data/edit_book_data/', edit_book_data , name='edit_book_data_url'),
+   path('book_data/edit_book_data/', edit_book_data , name='edit_book_data_url'),
     path('book_data/delete_book_data/', delete_book_data, name='delete_book_data_url'),
     
   

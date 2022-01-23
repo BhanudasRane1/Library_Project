@@ -7,6 +7,8 @@ from django.views.generic import View
 
 # Create your views here.
 
+
+#Login View 
 class Login_View(View):
     def get(self,request):
         template = 'account/login.html'
@@ -15,22 +17,26 @@ class Login_View(View):
         template = 'account/login.html'
         try:
             if request.method=='POST':
+                #Already save email as username ,so that we can use email as username for login
                 username = request.POST.get('username')
                 passwordd= request.POST.get('password') 
                 user = auth.authenticate(username=username,password=passwordd)
                 if user is not None:
                     auth.login(request,user)
                     messages.error(request,'Successfully login')
-                    return redirect("/")
+                    return redirect("book_data_url")
                 else:
                     messages.error(request,'Invalid credentials....Please Enter valid credentials')
-                    return redirect('login')
+                    return redirect('login_url')
             else: 
                 return render(request, template)
         except:
             return redirect('unauthorized_access_url')
 
+#ENd Login View
 
+
+#Signup View  Started.....
 class Signup_View(View):
     def get(self,request):
         template = 'account/signup.html'
@@ -64,6 +70,12 @@ class Signup_View(View):
                 return render(request, template)
             return redirect('/')
         return render(request, template)
+
+
+#Signup View  End .......
+
+
+#For Logout .........
 
 def logout(request):
     auth.logout(request)
